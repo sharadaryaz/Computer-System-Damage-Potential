@@ -1,19 +1,16 @@
-import networkx as nx
-from graphUtils import Vertex, Edge
+from graphUtils import Vertex, Edge, Process, Object
 from math import inf
- 
 class Graph:
 	edges = {}
+	processes = []
 	vertices = []
 	height = {}
 	def __init__(self, numVertex):
 		"""Initializing vertices with first one being source and last one being the target"""
 		self.numVertex = numVertex
-		self.Gx = nx.DiGraph()
 		for v in range(numVertex):
 			v = Vertex(v, 0, 0)
 			self.vertices.append(v)
-		self.Gx.add_nodes_from(self.vertices)
 
 	def __repr__(self):
 		print ("\nVertices: \t")
@@ -22,20 +19,22 @@ class Graph:
 		print ("\nEdges: \t")
 		self.edges
 
-	def addEdge(self, rate, cap, *v):
-		if not v[0] in self.edges:
-			self.edges[v[0]] = {}
-		self.edges[v[0]][v[1]] = Edge(rate, cap, *v)
-		self.vertices[v[0]] + self.vertices[v[1]]
-		self.Gx.add_edge(v[0], v[1], rate=rate, capacity=cap)
-
-	
 	def display(self):
 		print ("\nVertices: \t")
 		for i in range(self.numVertex):
 			self.vertices[i].display()
 		print ("\nEdges: \t")
 		print(self.edges)
+		print ("\nProcesses: \t")
+		for p in self.processes:
+			print(p)
+
+	def addEdge(self, rate, cap, *v):
+		if not v[0] in self.edges:
+			self.edges[v[0]] = {}
+		self.edges[v[0]][v[1]] = Edge(rate, cap, *v)
+		self.vertices[v[0]] + self.vertices[v[1]]
+
 
 	def preFlow(self, s):
 		print ("\nInside PreFlow \t")
@@ -58,13 +57,7 @@ class Graph:
 				print ("\nFound Excess Flow with vertex %d\n"%(v.getValue()))
 				return v
 		return -1;
-				#and maxHeight < v.height:
-				#excessV = v
-				#maxHeight = v.height
-		# if excessV:
-		# 	return excessV 
-		# else:
-		# 	return -1
+				
 
 	
 	'''This function pushes the minimum of capacity of edge and excess rate of vertex to the adjacent vertex'''
@@ -125,17 +118,16 @@ class Graph:
 		return self.vertices[-1].excessRate
 
 if __name__ == '__main__':
-	G = Graph(6)
-	G.addEdge(0, 16, 0, 1)
-	G.addEdge(0,13, 0, 2)
-	G.addEdge(0,10,1, 2)
-	G.addEdge(0,4,2, 1)
-	G.addEdge(0,12,1, 3)
-	G.addEdge(0,14,2, 4)
-	G.addEdge(0,9,3, 2)
-	G.addEdge(0,20,3, 5)
-	G.addEdge(0,7,4, 3)
-	G.addEdge(0,4,4, 5)
+	G = Graph(4)
+	G.vertices[0] + G.vertices[1]
+	G.vertices[1] + G.vertices[2]
+	G.vertices[2] + G.vertices[3]
+	G.vertices[0].addObject(Object('Proc', G.vertices[0], 'Data0', [(1, 'E')]))
+	G.vertices[1].addObject(Object('Proc', G.vertices[1], 'Data1', [(2, 'E')]))
+	G.vertices[2].addObject(Object('Proc', G.vertices[2], 'Data2', [(3, 'E')]))
+	print("The first object  is %d"%G.vertices[0].objList[0].index)
+	G.processes.append(Process(G.vertices[0].objList[0]))
+	G.processes[0].createProcess(G, G.vertices[1].objList[0], 0, 3)
 	G.display()
 	#print("\nExcess Flow = %d"%G.findExcessFlow().excessRate)
-	print("\nMaximum Rate = %d"%G.maxRate())
+	#print("\nMaximum Rate = %d"%G.maxRate())

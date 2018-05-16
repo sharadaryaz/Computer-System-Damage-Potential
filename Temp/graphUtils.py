@@ -2,19 +2,27 @@ class Object:
 	index = 0
 	data = None
 	def __init__(self, type, *args):
-		self.index = index+1
+		self.index = Object.index
+		Object.index += 1
 		self.type = type
 		if type == 'Data':
-			self.data = args[0]
-		elif type == 'Proc':	
-			self.clist = args[1]
+			self.loc = args[0]
+			self.data = args[1]
+		elif type == 'Proc':
+			self.loc = args[0]
+			self.data = args[1]
+			self.clist = args[2]
 			self.execute = 0
+		print("\nObject with index {0}, location {1} and clist {2}".format(self.index, self.loc.index, self.clist))
+	def __repr__(self):
+		return ("\nObject with index {0}, location {1} and clist {2}".format(self.index, self.loc.index, self.clist))
 
 class Vertex:
 	def __init__(self, index, height, excessFlow):
 		self.height = height
 		self.excessRate = excessFlow
 		self.index = index
+		self.objList = []
 	def __add__(self, other):
 		if not hasattr(self, 'adjList'):
 			self.adjList = []
@@ -31,7 +39,7 @@ class Vertex:
 			print([i.index for i in self.adjList])
 
 class Edge:
-	def __init__(self, rate, cap, p, *v):
+	def __init__(self, rate, cap, *v):
 		self.v0 = v[0]
 		self.v1 = v[1]
 		self.capacity = cap
@@ -48,20 +56,26 @@ class Edge:
 
 class Process():
 	pid = 0
-	def __init__(self, obj, v):
-		self.pid = pid + 1
+	def __init__(self, obj):
+		self.pid = Process.pid
+		Process.pid += 1 
 		self.clist = obj.clist
-		self.loc = v
+		self.loc = obj.loc
+		self.plist = []
+	def __repr__(self):
+		return ("\nProcess {0} , loc - {1} , plist - {2}, clist - {3}".format(self.pid, self.loc.index, self.plist, self.clist))
 	def getLocation(self):
 		return self.loc
+	def createProcess(self, gPtr, obj, rate, cap):
+			if not obj.loc in self.loc.adjList:
+				return -1
+			if obj.type == 'Proc' and (obj.index, 'E') in self.clist:
+				self.p = Process(obj)
+				gPtr.processes.append(self.p)
+				self.plist.append(self.p.pid)
+				if self.loc != obj.loc:
+					print("Inside createProcess: Adding Edge %d %d with %d %d"%(self.loc.index, obj.loc.index, rate, cap))
+					gPtr.addEdge(rate, cap, self.loc.index, obj.loc.index)
+				
 
-
-	
-	
-		
-	 
-			
-		
-		
-	
 

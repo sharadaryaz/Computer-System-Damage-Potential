@@ -1,5 +1,6 @@
 from graphUtils import Vertex, Edge
 from math import inf
+
 class Graph:
 	edges = {}
 	vertices = []
@@ -121,6 +122,10 @@ class Graph:
 
 if __name__ == '__main__':
 	G = Graph(6)
+	vertices[0].addObject('Proc', [(3,'E'), (2,'E'), (1, 'W')] )
+	vertices[1].addObject('Proc', [(3,'E'), (2,'E'), (1, 'W')] )
+	vertices[2].addObject('Proc', [(3,'E'), (2,'E'), (1, 'W')] )
+	vertices[3].addObject('Proc', [(3,'E'), (2,'E'), (1, 'W')] )
 	G.addEdge(0, 16, 0, 1)
 	G.addEdge(0,13, 0, 2)
 	G.addEdge(0,10,1, 2)
