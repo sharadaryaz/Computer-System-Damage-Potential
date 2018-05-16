@@ -26,7 +26,8 @@ class Vertex:
 	def __add__(self, other):
 		if not hasattr(self, 'adjList'):
 			self.adjList = []
-		self.adjList.append(other)
+		if not other in self.adjList:
+			self.adjList.append(other)
 	def __repr__(self):
 		print("Vertex %d\t"%self.index)
 	def addObject(self, obj):
