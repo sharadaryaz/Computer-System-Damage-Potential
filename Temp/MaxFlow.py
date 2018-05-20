@@ -77,7 +77,7 @@ class Graph:
 				self.edges[k][i].rate += rate
 				print(self.edges[k][i].rate)
 				self.createRevEdge(rate, i, k)
-				G.display()
+				self.display()
 				return 1
 		print ("\nReturned 0 from Push")
 		return 0
@@ -104,13 +104,13 @@ class Graph:
 				minH = v.height
 				u.height = minH+1
 				print("Updated height of u with vertex %d height %d + 1"%(v.getValue(), v.height ))
-		G.display()
+		self.display()
 
 		'''This function returns the maximum rate, i.e. the excess flow of the target node, it keeps running as long as push and relabel methods returns true'''
 	def maxRate(self):
 		print ("\nInside MaxRate\n")
-		G.preFlow(0)
-		G.display()
+		self.preFlow(0)
+		self.display()
 		while self.findExcessFlow() != -1:
 			u = self.findExcessFlow()
 			if not self.Push(u):
@@ -118,19 +118,20 @@ class Graph:
 		return self.vertices[-1].excessRate
 
 if __name__ == '__main__':
-	G = Graph(4)
-	G.vertices[0] + G.vertices[1]
-	G.vertices[1] + G.vertices[2]
-	G.vertices[2] + G.vertices[3]
-	G.vertices[0].addObject(Object('Proc', G.vertices[0], 'Data0', [(1, 'E')]))
-	G.vertices[1].addObject(Object('Proc', G.vertices[1], 'Data1', [(2, 'E')]))
-	G.vertices[2].addObject(Object('Proc', G.vertices[2], 'Data2', [(3, 'E')]))
-	G.vertices[3].addObject(Object('Proc', G.vertices[3], 'Data2', []))
-	print("The first object  is %d"%G.vertices[0].objList[0].index)
-	G.processes.append(Process(G.vertices[0].objList[0]))
-	G.processes[0].createProcess(G, G.vertices[1].objList[0], 0, 3)
-	G.processes[1].createProcess(G, G.vertices[2].objList[0], 0, 1)
-	G.processes[2].createProcess(G, G.vertices[3].objList[0], 0, 2)
-	G.display()
-	#print("\nExcess Flow = %d"%G.findExcessFlow().excessRate)
-	print("\nMaximum Rate = %d"%G.maxRate())
+	pass
+	# G = Graph(4)
+	# G.vertices[0] + G.vertices[1]
+	# G.vertices[1] + G.vertices[2]
+	# G.vertices[2] + G.vertices[3]
+	# G.vertices[0].addObject(Object('Proc', G.vertices[0], 'Data0', [(1, 'E')]))
+	# G.vertices[1].addObject(Object('Proc', G.vertices[1], 'Data1', [(2, 'E')]))
+	# G.vertices[2].addObject(Object('Proc', G.vertices[2], 'Data2', [(3, 'E')]))
+	# G.vertices[3].addObject(Object('Proc', G.vertices[3], 'Data2', []))
+	# print("The first object  is %d"%G.vertices[0].objList[0].index)
+	# G.processes.append(Process(G.vertices[0].objList[0]))
+	# G.processes[0].createProcess(G, G.vertices[1].objList[0], 0, 3)
+	# G.processes[1].createProcess(G, G.vertices[2].objList[0], 0, 1)
+	# G.processes[2].createProcess(G, G.vertices[3].objList[0], 0, 2)
+	# G.display()
+	# #print("\nExcess Flow = %d"%G.findExcessFlow().excessRate)
+	# print("\nMaximum Rate = %d"%G.maxRate())
