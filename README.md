@@ -9,9 +9,9 @@ Python 3.0 or higher
 
 ## Running the tests
 
-Test with basic parameters - python /path_to_tests/sample_test_basic
+Test with basic parameters - python /path_to_[tests]/sample_test_basic
 
-Test with basic parameters - python /path_to_tests/sample_test_basic
+Test with advanced parameters - python /path_to_[tests]/sample_test_advanced
 
 ### Break down into end to end tests
 
@@ -25,9 +25,7 @@ The capbilities added to the newly created process
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Python 3.6]:(https://docs.python.org/3/) - The framework used
 
 
 
@@ -42,4 +40,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Alexander V. Karzanov - Algorithm in 1974 Soviet Mathematical Dokladi 
+* Alexander V. Karzanov - Push-Relabel Algorithm in 1974 Soviet Mathematical Dokladi 
